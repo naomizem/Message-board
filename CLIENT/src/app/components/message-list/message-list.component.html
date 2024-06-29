@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-sm-6">
+        <message-form (saveMessage)="addMessage($event)" *ngIf="newForm"></message-form>
+        <message-form [message]="selectedMessage" (saveMessage)="saveMessage($event)" *ngIf="selectedMessage && !newForm"></message-form>
+       
+      
+   
+        <div *ngIf="loading" class="loading-overlay">
+            <div class="loader"></div>
+            <span>שומר...</span>
+    </div>
+    </div>
+    <div dir="rtl" class="col-sm-6">
+        <br><br>
+        <h1>{{title}}</h1>
+        <input type="text" placeholder="חיפוש..." [(ngModel)]="textSearch" (change)="filterMessages()" class="form-control" />
+       <br><br>
+       
+             <div dir="rtl">
+        <p-button (click)="addNewMessage()"> הוסף הודעה למערכת</p-button>
+    </div>
+
+    <p-table  [value]="filterMessages()" [tableStyle]="{ 'min-width': '50rem' }" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>מספר הודעה</th>
+                <th>מזהה משתמש</th>
+                <th>כותרת</th>
+                <th>גוף ההודעה</th>
+                <th>תאריך שליחת ההודעה</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-message>
+            <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.userId }}</td>
+                <td>{{ message.title }}</td>
+                <td>{{ message.body }}</td>
+                <td>{{date}}</td>
+                <td><p-button (click)="selectedMessagee(message)">ערוך הודעה</p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+   
+</div>

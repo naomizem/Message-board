@@ -1,0 +1,35 @@
+<div class="row">
+    <div dir="rtl" class="col-6">
+        <form (submit)="subm($event)"  [formGroup]="messageForm" class="col-md-6">
+<!-- [ngClass]- עושה את האינפוט אדום ברגע שיצאו ממנו והוא לא תקין -->
+<div>
+    <br><br><br><br>
+<h6>{{title}}</h6>
+<label>כותרת</label>
+<input [ngClass]="{'ng-invalid ng-dirty':!messageForm.controls['title'].valid && messageForm.controls['title'].touched}" type="text" formControlName="title" placeholder="title" pInputText>
+    <div *ngIf="!messageForm.controls['title'].valid && messageForm.controls['title'].touched">
+         <small *ngIf="messageForm.controls['title'].errors && messageForm.controls['title'].errors['required']"  class="p-erroes">Must Enter Value</small>
+         <small *ngIf="messageForm.controls['title'].errors && messageForm.controls['title'].errors['minlength']" class="p-erroes">Min Length Is 2</small>
+         <small *ngIf="messageForm.controls['title'].errors && messageForm.controls['title'].errors['maxlength']" class="p-erroes">Max Length Is 40</small>
+    </div>
+</div>   
+<div>
+    <br>
+    <label>הודעה</label>
+    <input [ngClass]="{'ng-invalid ng-dirty':!messageForm.controls['body'].valid && messageForm.controls['body'].touched}" type="text" formControlName="body" placeholder="body" pInputText>
+    <div *ngIf="!messageForm.controls['body'].valid && messageForm.controls['body'].touched">
+         <small *ngIf="messageForm.controls['body'].errors && messageForm.controls['body'].errors['required']"  class="p-erroes">Must Enter Value</small>
+         <small *ngIf="messageForm.controls['body'].errors && messageForm.controls['body'].errors['minlength']" class="p-erroes">Min Length Is 2</small>
+         <small *ngIf="messageForm.controls['body'].errors && messageForm.controls['body'].errors['maxlength']" class="p-erroes">Max Length Is 300</small>
+    </div>
+</div>   
+<div>
+    <br>
+    <p-button *ngIf="message" type="submit" >שמור נתונים</p-button>  
+    <p-button *ngIf="!message" type="submit" >הוסף הודעה</p-button>    
+</div>
+</form>
+</div>
+</div>
+
+
